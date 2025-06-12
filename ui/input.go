@@ -2,6 +2,7 @@ package ui
 
 import (
 	"fmt"
+	"os"
 	"temp-convert/utils"
 )
 
@@ -11,6 +12,7 @@ func input() {
 	fmt.Println("What do you want to convert?\n1. Celsius to Kelvin\n2. Celsius to Fahrenheit\n3. Celsius to Reaumur\n0. Back to main menu")
 	fmt.Print("Please enter your choice (1-3): ")
 	fmt.Scan(&choice)
+	utils.Clear()
 	switch choice {
 	case 1:
 		var celsius float64
@@ -31,7 +33,6 @@ func input() {
 		fmt.Printf("Temperature in Reaumur: %.2f\n", utils.CtoR(celsius))
 		utils.AddHistory(fmt.Sprintf("Celsius to Reaumur: %.2f", utils.CtoR(celsius)))
 	case 0:
-		fmt.Println("Returning to main menu...")
 		Home()
 	default:
 		fmt.Println("Invalid choice. Please select a valid option.")
@@ -40,13 +41,13 @@ func input() {
 	fmt.Println("Do you want to do another conversion? (yes/no)")
 	var response string
 	fmt.Scan(&response)
+	utils.Clear()
 	if response == "yes" || response == "y" {
 		input()
 	} else if response == "no" || response == "n" {
-		fmt.Println("Returning to main menu...")
 		Home()
 	} else {
-		fmt.Println("Invalid response. Returning to main menu...")
-		Home()
+		fmt.Println("Invalid response.")
+		os.Exit(1)
 	}
 }
